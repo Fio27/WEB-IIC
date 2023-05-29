@@ -66,3 +66,5 @@ C:\Users\Fio\OneDrive\Desktop\Setimo Cuatri\Progra\Web IIC\WEB-IIC\Nortwind\Back
 C:\Users\Fio\OneDrive\Desktop\Setimo Cuatri\Progra\Web IIC\WEB-IIC\Nortwind\BackEnd\obj\Debug\net6.0\BackEnd.pdb
 C:\Users\Fio\OneDrive\Desktop\Setimo Cuatri\Progra\Web IIC\WEB-IIC\Nortwind\BackEnd\obj\Debug\net6.0\BackEnd.genruntimeconfig.cache
 C:\Users\Fio\OneDrive\Desktop\Setimo Cuatri\Progra\Web IIC\WEB-IIC\Nortwind\BackEnd\obj\Debug\net6.0\ref\BackEnd.dll
+C:\Users\Fio\OneDrive\Desktop\Setimo Cuatri\Progra\Web IIC\WEB-IIC\Nortwind\BackEnd\bin\Debug\net6.0\DAL.dll
+C:\Users\Fio\OneDrive\Desktop\Setimo Cuatri\Progra\Web IIC\WEB-IIC\Nortwind\BackEnd\bin\Debug\net6.0\DAL.pdb
