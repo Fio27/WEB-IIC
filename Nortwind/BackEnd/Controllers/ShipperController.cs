@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DAL.Interfaces;
 using DAL.Implementations;
+using BackEnd.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,6 +14,26 @@ namespace BackEnd.Controllers
     {
         private IShipperDAL shipperDAL;
 
+        private ShipperModel Convertir (Shipper shipper)
+        {
+            return new ShipperModel
+            {
+                ShipperId = shipper.ShipperId,
+                CompanyName = shipper.CompanyName,
+                Phone = shipper.Phone,
+            };
+
+        }
+        private Shipper Convertir(ShipperModel shipper)
+        {
+            return new Shipper
+            {
+                ShipperId = shipper.ShipperId,
+                CompanyName = shipper.CompanyName,
+                Phone = shipper.Phone,
+            };
+        }
+
         public ShipperController()
         {
             shipperDAL = new ShipperDALImp();
@@ -23,8 +44,14 @@ namespace BackEnd.Controllers
         public JsonResult Get()
         {
             IEnumerable<Shipper> shippers = shipperDAL.GetAll();
-            return new JsonResult(shippers);
+            List<ShipperModel> models = new List<ShipperModel>();
 
+           foreach (var shipper in shippers)
+            {
+                models.Add(Convertir (shipper));
+                
+            }
+            return new JsonResult(models);
         }
 
         // GET api/<ShipperController>/5
@@ -32,7 +59,7 @@ namespace BackEnd.Controllers
         public JsonResult Get(int id)
         {
             Shipper shipper = shipperDAL.Get(id);
-            return new JsonResult(shipper);
+            return new JsonResult(Convertir(shipper));
         }
 
         // POST api/<ShipperController>
