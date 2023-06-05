@@ -1,14 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FrontEnd.Helpers;
+using FrontEnd.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd.Controllers
 {
     public class ShipperController : Controller
     {
+        ShipperHelper shipperHelper;
+
         // GET: ShipperController
+
         public ActionResult Index()
         {
-            return View();
+            shipperHelper = new ShipperHelper();
+            List<ShipperViewModel> lst = shipperHelper.GetAll();
+
+            return View(lst);
         }
 
         // GET: ShipperController/Details/5
