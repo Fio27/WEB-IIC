@@ -1,4 +1,4 @@
-﻿  @model IEnumerable<FrontEnd.Models.ShipperViewModel>
+﻿@model IEnumerable<FrontEnd.Models.ShipperViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ShipperId}) |
-                @Html.ActionLink("Details", "Details", new { id=item.CompanyName }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Phone })
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.ShipperId }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
