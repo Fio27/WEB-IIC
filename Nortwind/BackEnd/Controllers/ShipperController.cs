@@ -69,15 +69,22 @@ namespace BackEnd.Controllers
         }
 
         // PUT api/<ShipperController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public JsonResult Put([FromBody] ShipperModel shipper)
         {
+            shipperDAL.Update(Convertir(shipper));
+            return new JsonResult(shipper);
         }
 
         // DELETE api/<ShipperController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Shipper shipper = new Shipper
+            {
+                ShipperId = id
+            };
+            shipperDAL.Remove(shipper);
         }
     }
-}
+    }
