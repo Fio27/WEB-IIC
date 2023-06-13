@@ -51,9 +51,20 @@ namespace DAL.Implementations
 
         public bool Remove(Shipper entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (unidad = new UnidadDeTrabajo<Shipper>(new NorthWindContext()))
+                {
+                    unidad.genericDAL.Remove(entity);
+                    unidad.Complete();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-
         public void RemoveRange(IEnumerable<Shipper> entities)
         {
             throw new NotImplementedException();

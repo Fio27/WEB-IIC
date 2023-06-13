@@ -14,23 +14,23 @@ namespace BackEnd.Controllers
     {
         private IShipperDAL shipperDAL;
 
-        private ShipperModel Convertir (Shipper shipper)
+        private ShipperModel Convertir(Shipper shipper)
         {
             return new ShipperModel
             {
                 ShipperId = shipper.ShipperId,
                 CompanyName = shipper.CompanyName,
-                Phone = shipper.Phone,
+                Phone = shipper.Phone
             };
-
         }
+
         private Shipper Convertir(ShipperModel shipper)
         {
             return new Shipper
             {
                 ShipperId = shipper.ShipperId,
                 CompanyName = shipper.CompanyName,
-                Phone = shipper.Phone,
+                Phone = shipper.Phone
             };
         }
 
@@ -64,9 +64,11 @@ namespace BackEnd.Controllers
 
         // POST api/<ShipperController>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
+        public JsonResult Post([FromBody] ShipperModel shipper)
+        { shipperDAL.Add(Convertir(shipper));
+            return new JsonResult(shipper);
         }
+        
 
         // PUT api/<ShipperController>/5
         [HttpPut]
