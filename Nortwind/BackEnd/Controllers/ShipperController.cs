@@ -41,9 +41,9 @@ namespace BackEnd.Controllers
 
         // GET: api/<ShipperController>
         [HttpGet]
-        public JsonResult Get()
+        public async Task<JsonResult> Get()
         {
-            IEnumerable<Shipper> shippers = shipperDAL.GetAll();
+            IEnumerable<Shipper> shippers = await shipperDAL.GetAll();
             List<ShipperModel> models = new List<ShipperModel>();
 
            foreach (var shipper in shippers)
@@ -56,9 +56,9 @@ namespace BackEnd.Controllers
 
         // GET api/<ShipperController>/5
         [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        public async Task<JsonResult> Get(int id)
         {
-            Shipper shipper = shipperDAL.Get(id);
+            Shipper shipper = await shipperDAL.Get(id);
             return new JsonResult(Convertir(shipper));
         }
 
@@ -68,8 +68,8 @@ namespace BackEnd.Controllers
         { shipperDAL.Add(Convertir(shipper));
             return new JsonResult(shipper);
         }
-        
 
+        #region Modificar
         // PUT api/<ShipperController>/5
         [HttpPut]
         public JsonResult Put([FromBody] ShipperModel shipper)
@@ -78,6 +78,9 @@ namespace BackEnd.Controllers
             return new JsonResult(shipper);
         }
 
+        #endregion
+
+        #region Eliminar 
         // DELETE api/<ShipperController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
@@ -90,3 +93,5 @@ namespace BackEnd.Controllers
         }
     }
     }
+
+#endregion

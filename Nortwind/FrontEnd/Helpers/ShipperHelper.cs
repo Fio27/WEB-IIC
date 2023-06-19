@@ -60,7 +60,7 @@ namespace FrontEnd.Helpers
         }
         #endregion
 
-       
+        #region Delete
         public ShipperViewModel Delete(int id)
         {
             ShipperViewModel shipper = new ShipperViewModel();
@@ -69,8 +69,8 @@ namespace FrontEnd.Helpers
             // category = JsonConvert.DeserializeObject<CategoryViewModel>(content);
             return shipper;
         }
-       
 
+        #endregion
     }
 
 }

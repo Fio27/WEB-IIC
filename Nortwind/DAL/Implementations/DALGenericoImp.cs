@@ -59,11 +59,11 @@ namespace DAL.Implementations
             }
         }
 
-        public TEntity Get(int id)
+        public async Task<TEntity> Get(int id)
         {
             try
             {
-                return Context.Set<TEntity>().Find(id);
+                return await Context.Set<TEntity>().FindAsync(id);
             }
             catch (Exception)
             {
