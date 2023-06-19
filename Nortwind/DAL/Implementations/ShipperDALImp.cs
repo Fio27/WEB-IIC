@@ -55,11 +55,24 @@ namespace DAL.Implementations
 
         public async Task<IEnumerable<Shipper>> GetAll()
         {
-           
-            IEnumerable<Shipper> shippers = null;
-            using (unidad = new UnidadDeTrabajo<Shipper>(new NorthWindContext()))
+            List<Shipper> shippers = new List<Shipper>();
+            List<SP_GetAllShippers_Result> resultado;
+
+            string Query = "[dbo].[SP_GetAllShippers]";
+            NorthWindContext northwindContext = new NorthWindContext();
+            resultado = await northwindContext.SP_GetAllShippers_Results
+                        .FromSqlRaw(Query)
+                        .ToListAsync();
+            foreach (var item in resultado)
             {
                 shippers = await unidad.genericDAL.GetAll();
+                shippers.Add(
+                    new Shipper
+                    {
+                        ShipperId = item.ShipperId,
+                        CompanyName = item.CompanyName,
+                        Phone = item.Phone
+                    });
             }
             return shippers;
         }
@@ -71,7 +84,6 @@ namespace DAL.Implementations
             {
                 using (unidad = new UnidadDeTrabajo<Shipper>(new NorthWindContext()))
                 {
-                    unidad.genericDAL.Remove(entity);
                     unidad.Complete();
                 }
                 return true;
