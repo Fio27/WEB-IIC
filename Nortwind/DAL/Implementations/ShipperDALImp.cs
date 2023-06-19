@@ -1,5 +1,7 @@
 ﻿using DAL.Interfaces;
 using Entities.Entities;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +15,42 @@ namespace DAL.Implementations
     {
         private NorthWindContext _northWindContext;
         private UnidadDeTrabajo<Shipper> unidad;
-
-        NorthWindContext northwindContext = new NorthWindContext();
-
         public bool Add(Shipper entity)
         {
+            NorthWindContext northwindContext = new NorthWindContext();
+
             try
             {
-                using (unidad = new UnidadDeTrabajo<Shipper>(new NorthWindContext()))
-                {
-                    unidad.genericDAL.Add(entity);
-                    unidad.Complete();
-                }
+
+            string Query = "EXEC [dbo].[SP_AddShipper] @Nombre, @Telefono";
+            var param = new SqlParameter[]
+            {
+                  new SqlParameter()
+                    {
+                        ParameterName = "@Nombre",
+                        SqlDbType= System.Data.SqlDbType.VarChar,
+                        Direction = System.Data.ParameterDirection.Input,
+                        Value= entity.CompanyName
+                    },
+                     new SqlParameter()
+                    {
+                        ParameterName = "@Telefono",
+                        SqlDbType= System.Data.SqlDbType.VarChar,
+                        Direction = System.Data.ParameterDirection.Input,
+                        Value= entity.Phone
+                    }
+
+                };
+                   int resultado = northwindContext.Database.ExecuteSqlRaw(Query, param);
                 return true;
             }
             catch (Exception)
-            {
+                 {
                 return false;
-            }
+                 }
         }
 
-            public void AddRange(IEnumerable<Shipper> entities)
+public void AddRange(IEnumerable<Shipper> entities)
         {
             throw new NotImplementedException();
         }
@@ -65,14 +82,13 @@ namespace DAL.Implementations
                         .ToListAsync();
             foreach (var item in resultado)
             {
-                shippers = await unidad.genericDAL.GetAll();
                 shippers.Add(
-                    new Shipper
-                    {
-                        ShipperId = item.ShipperId,
-                        CompanyName = item.CompanyName,
-                        Phone = item.Phone
-                    });
+                      new Shipper
+                      {
+                          ShipperId = item.ShipperId,
+                          CompanyName = item.CompanyName,
+                          Phone = item.Phone
+                      });
             }
             return shippers;
         }
