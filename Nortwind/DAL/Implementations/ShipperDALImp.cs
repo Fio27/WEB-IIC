@@ -100,6 +100,7 @@ public void AddRange(IEnumerable<Shipper> entities)
             {
                 using (unidad = new UnidadDeTrabajo<Shipper>(new NorthWindContext()))
                 {
+                    unidad.genericDAL.Remove(entity);
                     unidad.Complete();
                 }
                 return true;
