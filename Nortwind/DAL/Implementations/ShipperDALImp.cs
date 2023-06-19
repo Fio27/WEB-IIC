@@ -41,6 +41,7 @@ namespace DAL.Implementations
 
         public IEnumerable<Shipper> GetAll()
         {
+           
             IEnumerable<Shipper> shippers = null;
             using (unidad = new UnidadDeTrabajo<Shipper>(new NorthWindContext()))
             {
