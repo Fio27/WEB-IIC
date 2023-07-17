@@ -59,11 +59,12 @@ namespace DAL.Implementations
             }
         }
 
-        public async Task<TEntity> Get(int id)
+        public async Task<TEntity> Get(int id)/*async: asincronica*/
         {
             try
             {
-                return await Context.Set<TEntity>().FindAsync(id);
+
+                return await Context.Set<TEntity>().FindAsync(id); /*await: dejar en memoria dicha tarea.*/
             }
             catch (Exception)
             {

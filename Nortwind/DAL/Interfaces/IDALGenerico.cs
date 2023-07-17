@@ -9,7 +9,7 @@ namespace DAL.Interfaces
 {
     public interface IDALGenerico<TEntity> where TEntity : class
     {
-        Task<TEntity> Get(int id);
+        Task<TEntity> Get(int id); /*Tarea*/
         Task<IEnumerable<TEntity>> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
